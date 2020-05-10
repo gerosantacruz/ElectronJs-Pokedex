@@ -10,3 +10,4 @@ app.on('ready', () => {
     })
     mainWindow.loadFile(__dirname + '/index.html')
 })
+app.allowRendererProcessReuse = true

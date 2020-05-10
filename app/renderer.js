@@ -17,6 +17,7 @@ formSection.addEventListener('submit', async (e) => {
     checkRecord();
     ShowPokemon(Pokejson);
     
+    
 });
 
 
@@ -31,9 +32,16 @@ function ShowPokemon(data){
 
     <p>ID: ${data.id}</p>
     <p>Weight: ${data.weight}</p>
-    <p>Height: ${data.height}</p>
-    <p>Abilities: ${data.abilities[0].ability.name} - ${data.abilities[1].ability.name}  </p>`;
+    <p>Height: ${data.height}</p>`
+
+    data.abilities.forEach(element => {
+        console.log(element.ability.name);
+    }
+        )
     elemt.append(newDiv);
+
+    getAbility(data)
+
 }
 
 function checkRecord(){
@@ -42,8 +50,21 @@ function checkRecord(){
     if(isRecord){
         isRecord.parentNode.removeChild(isRecord);
     }
+}
 
+function getAbility(data){
+    //let elemt = pokeSection;
+    var addAbility = document.getElementById('record');
 
+    addAbility.innerHTML += `<h4>Abilities: </h4>`
+    data.abilities.forEach(element => {
+        addAbility.innerHTML += `
+            <p> ${element.ability.name}</p>
+        `
+
+    });
+
+    addAbility.append(addAbility)
 }
 
 
