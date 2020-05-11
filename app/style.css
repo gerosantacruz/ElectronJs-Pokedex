@@ -1,0 +1,36 @@
+#stats .pokeAt {
+    
+    float: right;
+    margin-left: 2cm;
+    
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+body{
+    background-color: crimson;
+    color:white;
+}
+
+
+#pokemonType {
+    float:left;
+    margin-left: 2cm;
+    margin-right: 2cm;
+}
+
+#pokemonAby{
+    float: left;
+    margin-left: 25%;
+}
+
+img{
+    float: left;
+    margin-left: 40%;
+}
+
+h3{
+    text-align: center;
+}
