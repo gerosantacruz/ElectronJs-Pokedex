@@ -8,17 +8,21 @@ const pokeSection = document.querySelector('.pokeAt');
 
 
 formSection.addEventListener('submit', async (e) => {
+    try {
+
     e.preventDefault();
     const pokemonName = inputSection.value;
     const url = 'https://pokeapi.co/api/v2/pokemon/' + pokemonName;
-    const response = await fetch(url);
+    const response = await fetch(url).catch(showError());
     const Pokejson = await response.json();
-   
+
     checkRecord();
     ShowPokemon(Pokejson);
     
-    
-});
+    } catch(e) {
+        console.log(e)
+    }
+}) ;
 
 
 function ShowPokemon(data){
@@ -27,28 +31,31 @@ function ShowPokemon(data){
     newDiv.setAttribute("id", "record");
     
 
-    newDiv.innerHTML = `<h4 id="data">Pokemon: ${data.name}</h4>
+    newDiv.innerHTML = `<h3 id="data">Pokemon: ${data.name}</h3>
     <img src=${data.sprites.front_default} alt="${data.name}">
 
-    <p>ID: ${data.id}</p>
-    <p>Weight: ${data.weight}</p>
-    <p>Height: ${data.height}</p>`
+    <h4>ID: ${data.id}</h4>
+    <h4>Weight: ${data.weight}</h4>
+    <h4>Height: ${data.height}</h4>`
 
-    data.abilities.forEach(element => {
-        console.log(element.ability.name);
-    }
-        )
+    
     elemt.append(newDiv);
 
-    getAbility(data)
+    getAbility(data);
+    getType(data);
 
 }
 
 function checkRecord(){
-    var isRecord = document.getElementById('record');
+    const isRecord = document.getElementById('record');
+    const isError = document.getElementById('error');
 
     if(isRecord){
-        isRecord.parentNode.removeChild(isRecord);
+        isRecord.remove();
+    }
+
+    else if(isError){
+        isError.remove();
     }
 }
 
@@ -56,16 +63,39 @@ function getAbility(data){
     //let elemt = pokeSection;
     var addAbility = document.getElementById('record');
 
-    addAbility.innerHTML += `<h4>Abilities: </h4>`
+    addAbility.innerHTML += `<h3>Abilities: </h3>`
     data.abilities.forEach(element => {
         addAbility.innerHTML += `
-            <p> ${element.ability.name}</p>
+            <h4> ${element.ability.name}</h4>
         `
-
     });
 
     addAbility.append(addAbility)
 }
 
+function getType(data){
+    let  addType = document.getElementById('record');
+    let poketype = document.createElement('div');
+    
+    poketype.setAttribute('id', 'type')
 
+    poketype.innerHTML += `<h3>Type: </h3>`;
+    data.types.forEach( element => {
+        pokeType.innerHTML += `<h4>${element.type.name}</h4>`
+    });
 
+    addType.append(poketype)
+
+}
+
+function showError(){
+    checkRecord();
+    let elemt = pokeSection;
+    var newDiv = document.createElement('div');
+    newDiv.setAttribute("id", "error");
+    
+
+    newDiv.innerHTML = `<h3>Pokemon not found</h3>`;
+
+    elemt.append(newDiv);
+}
