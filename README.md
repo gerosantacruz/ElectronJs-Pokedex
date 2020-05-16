@@ -7,6 +7,7 @@ to get the data from the pokemon was used the api 'PokeApi', which is free and i
 Some images:
 
 Menu:
+
 ![menu](https://github.com/gerosantacruz/ElectronJs-Pokedex/blob/master/img/Menu.PNG)
 
 The result for Pikachu:
