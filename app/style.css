@@ -29,6 +29,8 @@ body{
 img{
     float: left;
     margin-left: 40%;
+    background-color: white;
+    margin-right: 10%;
 }
 
 h3{
